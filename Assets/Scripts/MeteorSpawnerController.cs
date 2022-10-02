@@ -8,16 +8,17 @@ public class MeteorSpawnerController : MonoBehaviour
     private GameObject meteorPrefab;
 
     [SerializeField]
-    private int horizontalDirection;
+    private int meteorHorizontalDirection;
 
     [SerializeField]
-    private float velocity;
+    private float meteorTranslationSpeed;
 
     [SerializeField]
-    private float interval;
+    private float intervalGeneration;
+
     void Start()
     {
-        InvokeRepeating(nameof(SpawnMeteor), interval, interval);
+        InvokeRepeating(nameof(SpawnMeteor), intervalGeneration, intervalGeneration);
     }
 
     private void SpawnMeteor()
@@ -32,9 +33,11 @@ public class MeteorSpawnerController : MonoBehaviour
         // Config meteor
         GameObject meteor = Instantiate(meteorPrefab);
         MeteorController meteorController = meteor.GetComponent<MeteorController>();
-        meteorController.horizontalDirection = horizontalDirection;
-        meteorController.velocity = velocity;
-        float meteorXPosition = spawnerXPosition + horizontalDirection;
+        meteorController.horizontalDirection = meteorHorizontalDirection;
+        meteorController.translationSpeeed = meteorTranslationSpeed;
+        float meteorXPosition = spawnerXPosition;
         meteor.transform.position = new Vector3(meteorXPosition, meteorYPosition, 0);
+
+        Destroy(meteor, 6);
     }
 }

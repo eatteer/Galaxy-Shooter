@@ -4,21 +4,23 @@ using UnityEngine;
 
 public class MeteorController : MonoBehaviour
 {
+    // Value set by MeteorSpawnerController
     [HideInInspector]
     public int horizontalDirection;
 
+    // Value set by MeteorSpawnerController
     [HideInInspector]
-    public float velocity;
+    public float translationSpeeed;
 
     void Update()
     {
-        Vector3 movement = new Vector3(horizontalDirection, 0, 0) * velocity * Time.deltaTime;
-        this.transform.Translate(movement);
+        Vector3 translation = new Vector3(horizontalDirection, 0, 0) * translationSpeeed * Time.deltaTime;
+        this.transform.Translate(translation);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "MeteorSpawner")
+        if (collision.tag == "Bullet")
         {
             Destroy(this.gameObject);
         }

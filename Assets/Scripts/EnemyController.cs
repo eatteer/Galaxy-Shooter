@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyController : MonoBehaviour
 {
     [SerializeField]
-    private float movementVelocity;
+    private float translationSpeed;
 
     [SerializeField]
     private GameObject bulletPrefab;
@@ -14,31 +14,42 @@ public class EnemyController : MonoBehaviour
     private int bulletVerticalDirection;
 
     [SerializeField]
-    private float bulletVelocity;
+    private float bulletTranslationSpeed;
 
-    private float leftLimit = -8;
-    private float rightLimit = 8;
-    private int direction = 1;
+    [SerializeField]
+    private float bulletIntervalGeneration;
+
+    private float _leftLimit = -8;
+    private float _rightLimit = 8;
+    private int _direction = 1;
 
     private void Start()
     {
-        InvokeRepeating(nameof(Shoot), 1, 1);
+        InvokeRepeating(nameof(Shoot), bulletIntervalGeneration, bulletIntervalGeneration);
     }
 
     void Update()
     {
-        if (this.transform.position.x >= rightLimit)
+        if (this.transform.position.x >= _rightLimit)
         {
-            direction = -1;
+            _direction = -1;
         }
 
-        if (this.transform.position.x <= leftLimit)
+        if (this.transform.position.x <= _leftLimit)
         {
-            direction = 1;
+            _direction = 1;
         }
 
-        Vector3 movement = new Vector3(direction, 0, 0) * movementVelocity * Time.deltaTime;
-        this.transform.Translate(movement);
+        Vector3 translation = new Vector3(_direction, 0, 0) * translationSpeed * Time.deltaTime;
+        this.transform.Translate(translation);
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if(collision.tag == "Bullet")
+        {
+            Destroy(this.gameObject);
+        }
     }
 
     private void Shoot()
@@ -51,11 +62,13 @@ public class EnemyController : MonoBehaviour
         bulletController.verticalDirection = bulletVerticalDirection;
 
         // Config bullet velocity
-        bulletController.velocity = bulletVelocity;
+        bulletController.translationSpeed = bulletTranslationSpeed;
 
         // Config bullet position
         Vector3 playerPosition = this.transform.position;
         Vector3 position = new Vector3(playerPosition.x, playerPosition.y - 1, 0);
         bullet.transform.position = position;
+
+        Destroy(bullet, 3);
     }
 }

@@ -6,15 +6,15 @@ public class BulletController : MonoBehaviour
 {
     // Value set by PlayerController
     [HideInInspector]
-    public float velocity;
+    public int verticalDirection;
 
     // Value set by PlayerController
     [HideInInspector]
-    public int verticalDirection;
+    public float translationSpeed;
 
     void Update()
     {
-        Vector3 movement = new Vector3(0, verticalDirection, 0) * velocity * Time.deltaTime;
-        this.transform.Translate(movement);
+        Vector3 translation = new Vector3(0, verticalDirection, 0) * translationSpeed * Time.deltaTime;
+        this.transform.Translate(translation);
     }
 }

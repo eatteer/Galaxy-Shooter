@@ -4,11 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - MeteorSpawner
   - Meteor
   - Limit
   - Enemy
   - Bullet
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
