@@ -30,25 +30,25 @@ public class EnemyController : MonoBehaviour
 
     void Update()
     {
-        if (this.transform.position.x >= _rightLimit)
+        if (transform.position.x >= _rightLimit)
         {
             _direction = -1;
         }
 
-        if (this.transform.position.x <= _leftLimit)
+        if (transform.position.x <= _leftLimit)
         {
             _direction = 1;
         }
 
         Vector3 translation = new Vector3(_direction, 0, 0) * translationSpeed * Time.deltaTime;
-        this.transform.Translate(translation);
+        transform.Translate(translation);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.tag == "Bullet")
+        if (collision.tag == "Bullet" || collision.tag == "Player")
         {
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
     }
 
@@ -65,7 +65,7 @@ public class EnemyController : MonoBehaviour
         bulletController.translationSpeed = bulletTranslationSpeed;
 
         // Config bullet position
-        Vector3 playerPosition = this.transform.position;
+        Vector3 playerPosition = transform.position;
         Vector3 position = new Vector3(playerPosition.x, playerPosition.y - 1, 0);
         bullet.transform.position = position;
 

@@ -9,6 +9,9 @@ TagManager:
   - Enemy
   - Bullet
   - EnemyBullet
+  - Shield
+  - Speed
+  - TripleShot
   layers:
   - Default
   - TransparentFX

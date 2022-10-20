@@ -23,9 +23,9 @@ public class MeteorSpawnerController : MonoBehaviour
 
     private void SpawnMeteor()
     {
-        float spawnerXPosition = this.transform.position.x;
-        float spawnerYPosition = this.transform.position.y;
-        float spawnerYScale = this.transform.localScale.y;
+        float spawnerXPosition = transform.position.x;
+        float spawnerYPosition = transform.position.y;
+        float spawnerYScale = transform.localScale.y;
         float minYPosition = spawnerYPosition - (spawnerYScale / 2);
         float maxYPosition = spawnerYPosition + (spawnerYScale / 2);
         float meteorYPosition = Random.Range(minYPosition, maxYPosition);
