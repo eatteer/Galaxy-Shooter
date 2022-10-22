@@ -100,10 +100,8 @@ MonoBehaviour:
   translationSpeed: 6
   bulletPrefab: {fileID: 652231739814795927, guid: d6668292432a70244a7b72f186dcdb04, type: 3}
   bulletVerticalDirection: -1
-  bulletTranslationSpeed: 10
+  bulletTranslationSpeed: 8
   bulletIntervalGeneration: 1
-  shootAudioPrefab: {fileID: 1806359587410673498, guid: e75ebbd65abb6e24e87b0f0a6a54af17, type: 3}
-  explosionAudioPrefab: {fileID: 2483505091370591286, guid: 535a34f41e31baa42bc141afe0ec96ae, type: 3}
 --- !u!61 &-8102084192936884218
 BoxCollider2D:
   m_ObjectHideFlags: 0
