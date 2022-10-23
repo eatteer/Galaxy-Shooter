@@ -429,7 +429,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lives: 3
-  translationSpeed: 9
+  translationSpeed: 8
   translationSpeedOnPowerUp: 12
   translationSpeedPowerUpDuration: 3
   bulletPrefab: {fileID: 6896710821891206434, guid: 1d12f8b378c103244a633a031d79253e, type: 3}
@@ -786,13 +786,13 @@ MonoBehaviour:
     spawnRate: 1
   - name: Alien Invasion 2
     enemyPrefab: {fileID: 9066401026007143287, guid: 6508679f7344a6f48af2562a0b920948, type: 3}
-    enemiesCount: 5
+    enemiesCount: 6
     spawnRate: 1
   - name: Boss
-    enemyPrefab: {fileID: 9066401026007143287, guid: 6508679f7344a6f48af2562a0b920948, type: 3}
+    enemyPrefab: {fileID: 3726807806461450671, guid: 61af06af522559e43b7b73e40e8d9239, type: 3}
     enemiesCount: 1
     spawnRate: 1
-  timeBetweenWaves: 5
+  timeBetweenWaves: 3
   waveCountdown: 0
 --- !u!4 &930091206
 Transform:
@@ -802,7 +802,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 930091204}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 3.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 345032169}
@@ -1242,7 +1242,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5896977027556164087, guid: cd2e10a345d483c4998bf9a3250d81ab, type: 3}
       propertyPath: m_LocalScale.y
-      value: 6.5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5896977027556164087, guid: cd2e10a345d483c4998bf9a3250d81ab, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1250,7 +1250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5896977027556164087, guid: cd2e10a345d483c4998bf9a3250d81ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.7
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5896977027556164087, guid: cd2e10a345d483c4998bf9a3250d81ab, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1307,7 +1307,7 @@ PrefabInstance:
       objectReference: {fileID: 8996355474818261162, guid: 3824cd49803925a46b819dcf16e9feda, type: 3}
     - target: {fileID: 5896977027556164085, guid: cd2e10a345d483c4998bf9a3250d81ab, type: 3}
       propertyPath: intervalGeneration
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5896977027556164085, guid: cd2e10a345d483c4998bf9a3250d81ab, type: 3}
       propertyPath: horizontalDirection
@@ -1327,7 +1327,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5896977027556164087, guid: cd2e10a345d483c4998bf9a3250d81ab, type: 3}
       propertyPath: m_LocalScale.y
-      value: 6.5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 5896977027556164087, guid: cd2e10a345d483c4998bf9a3250d81ab, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1335,7 +1335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5896977027556164087, guid: cd2e10a345d483c4998bf9a3250d81ab, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -1.7
+      value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 5896977027556164087, guid: cd2e10a345d483c4998bf9a3250d81ab, type: 3}
       propertyPath: m_LocalPosition.z

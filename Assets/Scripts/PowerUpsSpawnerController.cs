@@ -20,7 +20,7 @@ public class PowerUpsSpawnerController : MonoBehaviour
     void Start()
     {
         powerUpsPrefabs.Add(shieldPrefab);
-        powerUpsPrefabs.Add(speedPrefab);
+        //powerUpsPrefabs.Add(speedPrefab);
         powerUpsPrefabs.Add(tripleShootPrefab);
     }
 
@@ -30,7 +30,7 @@ public class PowerUpsSpawnerController : MonoBehaviour
         if (timeElapsed >= intervalGeneration)
         {
             float edge = transform.localScale.x / 2;
-            int randomIndex = Random.Range(0, 3);
+            int randomIndex = Random.Range(0, powerUpsPrefabs.Count);
             float spawnXPosition = Mathf.Clamp(Random.Range(-edge, edge + 1), -edge, edge);
             GameObject randomPrefab = powerUpsPrefabs[randomIndex];
             GameObject randomPowerUp = Instantiate(randomPrefab);

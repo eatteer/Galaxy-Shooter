@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
@@ -49,8 +50,8 @@ public class PlayerController : MonoBehaviour
     {
         if (lives == 0)
         {
-            Time.timeScale = 0;
             Destroy(gameObject);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
         }
 
         if (Input.GetKeyDown(KeyCode.Space)) Shoot();
