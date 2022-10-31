@@ -22,6 +22,8 @@ public class BossController : MonoBehaviour
     [SerializeField]
     private int lives;
 
+    GameObject explosionAudio;
+
     private float _leftLimit = -7;
     private float _rightLimit = 7;
     private int _direction = 1;
@@ -29,6 +31,7 @@ public class BossController : MonoBehaviour
     private void Start()
     {
         InvokeRepeating(nameof(Shoot), bulletIntervalGeneration, bulletIntervalGeneration);
+        explosionAudio = transform.Find("ExplosionAudio").gameObject;
     }
 
     void Update()
@@ -52,7 +55,15 @@ public class BossController : MonoBehaviour
         if (collision.tag == "Bullet" || collision.tag == "Player")
         {
             lives--;
-            if (lives == 0) Destroy(gameObject);
+            if (lives == 0)
+            {
+                translationSpeed = 0;
+                explosionAudio.GetComponent<AudioSource>().Play();
+                gameObject.GetComponent<BoxCollider2D>().enabled = false;
+                gameObject.GetComponent<SpriteRenderer>().enabled = false;
+                CancelInvoke();
+                Destroy(gameObject, 2);
+            }
         }
     }
 

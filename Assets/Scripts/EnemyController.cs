@@ -19,6 +19,8 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float bulletIntervalGeneration;
 
+    private GameObject explosionAudio;
+
     private float _leftLimit = -8;
     private float _rightLimit = 8;
     private int _direction = 1;
@@ -26,6 +28,7 @@ public class EnemyController : MonoBehaviour
     private void Start()
     {
         InvokeRepeating(nameof(Shoot), bulletIntervalGeneration, bulletIntervalGeneration);
+        explosionAudio = transform.Find("ExplosionAudio").gameObject;
     }
 
     void Update()
@@ -48,7 +51,12 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.tag == "Bullet" || collision.tag == "Player")
         {
-            Destroy(gameObject);
+            translationSpeed = 0;
+            explosionAudio.GetComponent<AudioSource>().Play();
+            gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            CancelInvoke();
+            Destroy(gameObject, 2);
         }
     }
 

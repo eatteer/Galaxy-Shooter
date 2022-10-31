@@ -12,6 +12,13 @@ public class MeteorController : MonoBehaviour
     [HideInInspector]
     public float translationSpeeed;
 
+    GameObject explosionAudio;
+
+    private void Start()
+    {
+        explosionAudio = transform.Find("ExplosionAudio").gameObject;
+    }
+
     void Update()
     {
         Vector3 translation = new Vector3(horizontalDirection, 0, 0) * translationSpeeed * Time.deltaTime;
@@ -22,7 +29,11 @@ public class MeteorController : MonoBehaviour
     {
         if (collision.tag == "Bullet" || collision.tag == "Player")
         {
-            Destroy(gameObject);
+            translationSpeeed = 0;
+            explosionAudio.GetComponent<AudioSource>().Play();
+            gameObject.GetComponent<CapsuleCollider2D>().enabled = false;
+            gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            Destroy(gameObject, 2);
         }
     }
 }

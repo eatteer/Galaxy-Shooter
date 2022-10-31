@@ -40,10 +40,17 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private float shieldPowerUpDuration;
 
+    private GameObject laserShotAudio;
+    private GameObject powerUpAudio;
+    private GameObject explosionAudio;
+
     private void Start()
     {
         shield.SetActive(false);
         bulletTypePrefab = bulletPrefab;
+        laserShotAudio = transform.Find("LaserShotAudio").gameObject;
+        powerUpAudio = transform.Find("PowerUpAudio").gameObject;
+        explosionAudio = transform.Find("ExplosionAudio").gameObject;
     }
 
     void Update()
@@ -67,7 +74,10 @@ public class PlayerController : MonoBehaviour
             else lives--;
 
             // Could have been done in the EnemyBulletController but I don't have one
-            if (collision.tag == "EnemyBullet") Destroy(collision.gameObject);
+            if (collision.tag == "EnemyBullet") {
+                explosionAudio.GetComponent<AudioSource>().Play();
+                Destroy(collision.gameObject);
+            }   
         }
 
         if (collision.tag == "Speed")
@@ -75,6 +85,7 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             StartCoroutine(DeactivateSpeedPowerUp(translationSpeed));
             translationSpeed = translationSpeedOnPowerUp;
+            powerUpAudio.GetComponent<AudioSource>().Play();
         }
 
         if (collision.tag == "TripleShot")
@@ -82,6 +93,7 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             StartCoroutine(DeactiveTripleShotPowerUp());
             bulletTypePrefab = tripleBulletPrefab;
+            powerUpAudio.GetComponent<AudioSource>().Play();
         }
 
         if (collision.tag == "Shield")
@@ -89,6 +101,7 @@ public class PlayerController : MonoBehaviour
             Destroy(collision.gameObject);
             StartCoroutine(DeactivateShieldPowerUp());
             shield.SetActive(true);
+            powerUpAudio.GetComponent<AudioSource>().Play();
         }
     }
 
@@ -119,6 +132,8 @@ public class PlayerController : MonoBehaviour
         Vector3 playerPosition = transform.position;
         Vector3 position = new Vector3(playerPosition.x, playerPosition.y + 1, 0);
         bullet.transform.position = position;
+
+        laserShotAudio.GetComponent<AudioSource>().Play();
 
         Destroy(bullet, 3);
     }
