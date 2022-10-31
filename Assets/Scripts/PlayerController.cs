@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -34,18 +36,21 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField]
     private GameObject shield;
-
-    private GameObject bulletTypePrefab;
-
+    
     [SerializeField]
     private float shieldPowerUpDuration;
 
+    [SerializeField]
+    private Text livesText;
+
+    private GameObject bulletTypePrefab;
     private GameObject laserShotAudio;
     private GameObject powerUpAudio;
     private GameObject explosionAudio;
 
     private void Start()
     {
+        livesText.text = "Lives: " + lives;
         shield.SetActive(false);
         bulletTypePrefab = bulletPrefab;
         laserShotAudio = transform.Find("LaserShotAudio").gameObject;
@@ -55,7 +60,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
-        if (lives == 0)
+        if (lives <= 0)
         {
             Destroy(gameObject);
             SceneManager.LoadScene(SceneManager.GetActiveScene().name);
@@ -71,13 +76,18 @@ public class PlayerController : MonoBehaviour
         if (collision.tag == "Meteor" || collision.tag == "Enemy" || collision.tag == "EnemyBullet")
         {
             if (shield.activeSelf) shield.SetActive(false);
-            else lives--;
+            else
+            {
+                lives--;
+                livesText.text = "Lives: " + lives;
+            }
 
             // Could have been done in the EnemyBulletController but I don't have one
-            if (collision.tag == "EnemyBullet") {
+            if (collision.tag == "EnemyBullet")
+            {
                 explosionAudio.GetComponent<AudioSource>().Play();
                 Destroy(collision.gameObject);
-            }   
+            }
         }
 
         if (collision.tag == "Speed")

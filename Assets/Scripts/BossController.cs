@@ -24,12 +24,14 @@ public class BossController : MonoBehaviour
 
     GameObject explosionAudio;
 
+    private GameObject GM;
     private float _leftLimit = -7;
     private float _rightLimit = 7;
     private int _direction = 1;
 
     private void Start()
     {
+        GM = GameObject.Find("GM");
         InvokeRepeating(nameof(Shoot), bulletIntervalGeneration, bulletIntervalGeneration);
         explosionAudio = transform.Find("ExplosionAudio").gameObject;
     }
@@ -57,6 +59,7 @@ public class BossController : MonoBehaviour
             lives--;
             if (lives == 0)
             {
+                GM.GetComponent<GMController>().IncrementScore(10);
                 translationSpeed = 0;
                 explosionAudio.GetComponent<AudioSource>().Play();
                 gameObject.GetComponent<BoxCollider2D>().enabled = false;

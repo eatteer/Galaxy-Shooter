@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class EnemyController : MonoBehaviour
 {
@@ -19,6 +20,7 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private float bulletIntervalGeneration;
 
+    private GameObject GM;
     private GameObject explosionAudio;
 
     private float _leftLimit = -8;
@@ -27,6 +29,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        GM = GameObject.Find("GM");
         bulletIntervalGeneration = Random.Range(1f, 3f);
         InvokeRepeating(nameof(Shoot), bulletIntervalGeneration, bulletIntervalGeneration);
         explosionAudio = transform.Find("ExplosionAudio").gameObject;
@@ -52,6 +55,7 @@ public class EnemyController : MonoBehaviour
     {
         if (collision.tag == "Bullet" || collision.tag == "Player")
         {
+            GM.GetComponent<GMController>().IncrementScore();
             translationSpeed = 0;
             explosionAudio.GetComponent<AudioSource>().Play();
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
