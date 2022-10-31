@@ -27,6 +27,7 @@ public class EnemyController : MonoBehaviour
 
     private void Start()
     {
+        bulletIntervalGeneration = Random.Range(1f, 3f);
         InvokeRepeating(nameof(Shoot), bulletIntervalGeneration, bulletIntervalGeneration);
         explosionAudio = transform.Find("ExplosionAudio").gameObject;
     }
